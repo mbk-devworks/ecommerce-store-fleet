@@ -13,10 +13,6 @@ function formatMoney(cents: number) {
 
 export type ProductCardTone = "light" | "dark";
 
-function isRemoteImageUrl(url: string) {
-  return url.startsWith("http://") || url.startsWith("https://");
-}
-
 export function ProductCard({ product, tone = "light" }: { product: Product; tone?: ProductCardTone }) {
   const img = product.images[0];
   const onSale = product.compareAtPriceCents && product.compareAtPriceCents > product.priceCents;

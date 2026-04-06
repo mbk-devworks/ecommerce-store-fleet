@@ -4,24 +4,18 @@ import { useEffect, useState } from "react";
 import { ZoomIn } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { PRODUCT_IMAGE_PLACEHOLDER, SafeProductImage } from "@/components/safe-product-image";
+import { SafeProductImage } from "@/components/safe-product-image";
 
 type GalleryImage = { id: string; url: string; alt?: string | null };
 
 function LightboxImg({ url, alt }: { url: string; alt: string }) {
-  const [failed, setFailed] = useState(false);
-  useEffect(() => {
-    setFailed(false);
-  }, [url]);
-  const src = failed || !url?.trim() ? PRODUCT_IMAGE_PLACEHOLDER : url;
   return (
-    <img
-      src={src}
+    <SafeProductImage
+      src={url}
       alt={alt}
-      className="max-h-[min(85vh,900px)] w-auto max-w-full object-contain"
-      onError={() => {
-        if (!failed) setFailed(true);
-      }}
+      width={1200}
+      height={1200}
+      className="h-auto max-h-[min(85vh,900px)] w-auto max-w-full object-contain"
     />
   );
 }
